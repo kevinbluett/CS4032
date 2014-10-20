@@ -12,7 +12,7 @@ def lab2_handler(server, (sock, addr)):
             Thread(target=server.shutdown, args=[False]).start()
     else:
         sock.send(data)
-        sock.send("\nIP:%s\nPort:%s\nStudentID:11311101" % addr)
+        sock.send("IP:%s\nPort:%s\nStudentID:11311101" % addr)
 
     # Kill the socket
     sock.close()
