@@ -13,8 +13,8 @@ def lab2_handler(server, (sock, addr)):
         if server is not None:
             Thread(target=server.shutdown, args=[False]).start()
     else:
-        # Data could be passed off to another handler here as it doesn't fulfill one of the basi required requests
-        pass
+        sock.send(data)
+        sock.send("IP:%s\nPort:%s\nStudentID:11311101" % addr)
 
     # Kill the socket
     sock.close()
@@ -26,7 +26,7 @@ def start_server():
     # asyncore.loop()
 
     # Start the server in thread pool mode
-    server = LithiumThreadPoolServer('localhost', int(sys.argv[1]), lab2_handler)
+    server = LithiumThreadPoolServer('0.0.0.0', int(sys.argv[1]), lab2_handler)
     server.loop()
 
 if __name__ == '__main__':
