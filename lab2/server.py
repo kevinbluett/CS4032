@@ -11,7 +11,7 @@ def lab2_handler(server, (sock, addr)):
         if server is not None:
             Thread(target=server.shutdown, args=[False]).start()
     else:
-        sock.send("%sIP:%s\nPort:%s\nStudentID:11311101" % (data, socket.gethostbyname(socket.gethostname()), sys.argv[1]))
+        sock.send("%sIP:%s\nPort:%s\nStudentID:11311101" % (data,  socket.gethostbyaddr(socket.gethostbyname(socket.gethostname()))[0], sys.argv[1]))
 
     # Kill the socket
     sock.close()
