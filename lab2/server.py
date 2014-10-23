@@ -1,4 +1,4 @@
-import asyncore, sys
+import asyncore, sys, socket
 from async.server import *
 from threaded.server import *
 from helpers import *
@@ -8,7 +8,7 @@ def lab2_handler(server, (sock, addr)):
     data = data.replace("\r", "")
 
     if data == "HELO text\n":
-        sock.send("HELO text\nIP:%s\nPort:%s\nStudentID:11311101" % addr)
+        sock.send("HELO text\nIP:%s\nPort:%s\nStudentID:11311101" % (socket.gethostbyname(socket.gethostname()), sys.argv[1]))
     elif data == "KILL_SERVICE\n":
         if server is not None:
             Thread(target=server.shutdown, args=[False]).start()
