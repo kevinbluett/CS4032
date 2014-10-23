@@ -7,14 +7,12 @@ def lab2_handler(server, (sock, addr)):
     data = LithiumHelper.recv_all(sock)
     data = data.replace("\r", "")
 
-    if data == "HELO text\n":
-        sock.send("HELO text\nIP:%s\nPort:%s\nStudentID:11311101" % (socket.gethostbyname(socket.gethostname()), sys.argv[1]))
-    elif data == "KILL_SERVICE\n":
+    if data == "KILL_SERVICE\n":
         if server is not None:
             Thread(target=server.shutdown, args=[False]).start()
     else:
         sock.send(data)
-        sock.send("IP:%s\nPort:%s\nStudentID:11311101" % addr)
+        sock.send("IP:%s\nPort:%s\nStudentID:11311101" % (socket.gethostbyname(socket.gethostname()), sys.argv[1]))
 
     # Kill the socket
     sock.close()
